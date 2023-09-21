@@ -39,6 +39,18 @@ app.get('/auth/google/callback',
   });
 
 
+  app.get('/auth/github',
+  passport.authenticate('github', { scope: [ 'profile', "email" ], }));
+
+  app.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/login', session : false  }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    const tocken = genearteTocken(req.user);
+    res.status(200).send({"user" : req.user, "tocken" : tocken}) ;
+  });
+
+
 app.listen(5000, async ()=>{
     try{
 
