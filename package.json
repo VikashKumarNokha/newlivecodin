@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "node src/index.js",
-    "start": "nodemon src/index.js"
+    "start": "nodemon node src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.0",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.4",
     "nodemon": "^3.0.1",
     "passport": "^0.6.0",

@@ -4,7 +4,7 @@ const express = require("express")
 
 app.use(express.json());
 
- const passport = require("./configs/google-oauth")
+ //const passport = require("./configs/google-oauth")
 
  const connect = require("./configs/db");
 
@@ -27,28 +27,28 @@ app.use("/users", usercontriller);
 
 app.use("/product", productController);
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile', "email" ],  }));
+// app.get('/auth/google',
+//   passport.authenticate('google', { scope: ['profile', "email" ],  }));
 
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login', session : false }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-     const tocken = genearteTocken(req.user);
-    res.status(200).send({"user" : req.user, "tocken" : tocken}) ;
-  });
+// app.get('/auth/google/callback', 
+//   passport.authenticate('google', { failureRedirect: '/login', session : false }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//      const tocken = genearteTocken(req.user);
+//     res.status(200).send({"user" : req.user, "tocken" : tocken}) ;
+//   });
 
 
-  app.get('/auth/github',
-  passport.authenticate('github', { scope: [ 'profile', "email" ], }));
+//   app.get('/auth/github',
+//   passport.authenticate('github', { scope: [ 'profile', "email" ], }));
 
-  app.get('/auth/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/login', session : false  }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    const tocken = genearteTocken(req.user);
-    res.status(200).send({"user" : req.user, "tocken" : tocken}) ;
-  });
+//   app.get('/auth/github/callback', 
+//   passport.authenticate('github', { failureRedirect: '/login', session : false  }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     const tocken = genearteTocken(req.user);
+//     res.status(200).send({"user" : req.user, "tocken" : tocken}) ;
+//   });
 
 
 app.listen(5000, async ()=>{

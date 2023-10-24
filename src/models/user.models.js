@@ -8,7 +8,8 @@
     name : {type : String },
     email : {type : String , required : true , unique : true },
     password : {type : String , required : true},
-    role : [{type : String, required : true}]
+    role : [{type : String, required : true}],
+    profilePic : [{type : String, required : false}]
 
  },{
     timestamps : true,

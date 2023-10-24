@@ -5,7 +5,7 @@ const {body, validationResult } = require("express-validator")
 
 const users = require("../models/user.models");
 
-
+const fileUploads = require("../middleware/uploads")
 
 router.get("/", async (req, res)=>{
      try{ 
@@ -15,6 +15,38 @@ router.get("/", async (req, res)=>{
      }catch(err){
          console.log("err", err);
      }
+})
+
+
+router.post("/fileupload",  fileUploads("profilePic", "single") ,  async (req, res)=>{
+       try {
+          
+        console.log("ressss", req.body)
+        console.log("fileeee", req.file)
+
+        return res.status(200).send("successful")
+        
+       } catch (error) {
+          res.status(400).send({error});
+       }
+})
+
+router.post("/fileupload/multiple",  fileUploads("profilePic", "multiple" ) ,  async (req, res)=>{
+  try {
+     
+   console.log("ressss", req.body)
+  
+    const filepaths = req.files.map((e)=>{
+       return e.path
+    })
+       const newuser = await users.create({...req.body, profilePic : filepaths})
+      console.log("fileeee", filepaths)
+      
+   return res.status(200).send({newuser})
+   
+  } catch (error) {
+     res.status(400).send({error});
+  }
 })
 
 
